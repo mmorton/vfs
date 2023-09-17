@@ -209,6 +209,14 @@ func (f *File) MoveToFile(file vfs.File) error {
 	return f.Delete()
 }
 
+func (f *File) Options() []vfs.FileOption {
+	return nil
+}
+
+func (f *File) WithOption(attrs ...vfs.FileOption) vfs.File {
+	return f
+}
+
 // safeOsRename will attempt to do an os.Rename. If error is "invalid cross-device link" (where one OS file is on a
 // different device/volume than the other), then fall back to doing a copy-delete.
 func safeOsRename(srcName, dstName string) error {

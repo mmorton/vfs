@@ -420,6 +420,14 @@ func (f *File) Delete(_ ...options.DeleteOption) error {
 	return nil
 }
 
+func (f *File) Options() []vfs.FileOption {
+	return nil
+}
+
+func (f *File) WithOption(attrs ...vfs.FileOption) vfs.File {
+	return f
+}
+
 func newMemFile(file *File, location vfs.Location) *memFile {
 	return &memFile{
 		sync.Mutex{},

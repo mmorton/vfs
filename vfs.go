@@ -222,6 +222,15 @@ type File interface {
 
 	// URI returns the fully qualified absolute URI for the File.  IE, s3://bucket/some/path/to/file.txt
 	URI() string
+
+	Options() []FileOption
+	WithOption(opts ...FileOption) File
+}
+
+type FileOption interface{}
+
+type FileOptionGenerator interface {
+	Options() []FileOption
 }
 
 // Options are structs that contain various options specific to the file system

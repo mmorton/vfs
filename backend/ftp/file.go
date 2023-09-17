@@ -422,6 +422,14 @@ func (f *File) String() string {
 	return f.URI()
 }
 
+func (f *File) Options() []vfs.FileOption {
+	return nil
+}
+
+func (f *File) WithOption(attrs ...vfs.FileOption) vfs.File {
+	return f
+}
+
 func (f *File) createLocalTempFile() (*os.File, error) {
 	// Create temp file
 	return os.CreateTemp("", fmt.Sprintf("%s.%d", f.Name(), time.Now().UnixNano()))

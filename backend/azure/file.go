@@ -302,6 +302,14 @@ func (f *File) URI() string {
 	return fmt.Sprintf("%s://%s%s", f.fileSystem.Scheme(), utils.EnsureTrailingSlash(f.fileSystem.Host()), path.Join(f.container, f.name))
 }
 
+func (f *File) Options() []vfs.FileOption {
+	return nil
+}
+
+func (f *File) WithOption(attrs ...vfs.FileOption) vfs.File {
+	return f
+}
+
 func (f *File) checkTempFile() error {
 	if f.tempFile == nil {
 		client, err := f.fileSystem.Client()

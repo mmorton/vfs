@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	vfs "github.com/c2fo/vfs/v6"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -86,4 +87,12 @@ func (f *ReadWriteFile) Write(p []byte) (n int, err error) {
 // Content returns the data held by the ReadWriteFile struct
 func (f *ReadWriteFile) Content() string {
 	return f.Buffer.String()
+}
+
+func (f *ReadWriteFile) Options() []vfs.FileOption {
+	return nil
+}
+
+func (f *ReadWriteFile) WithOption(attrs ...vfs.FileOption) vfs.File {
+	return f
 }

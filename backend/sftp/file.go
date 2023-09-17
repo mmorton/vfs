@@ -346,6 +346,14 @@ func (f *File) openFile(flag int) (ReadWriteSeekCloser, error) {
 	return file, nil
 }
 
+func (f *File) Options() []vfs.FileOption {
+	return nil
+}
+
+func (f *File) WithOption(attrs ...vfs.FileOption) vfs.File {
+	return f
+}
+
 // defaultOpenFile uses sftp.Client to open a file and returns an sftp.File
 func defaultOpenFile(c Client, p string, f int) (ReadWriteSeekCloser, error) {
 	return c.OpenFile(p, f)

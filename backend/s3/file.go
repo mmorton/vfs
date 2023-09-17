@@ -30,6 +30,7 @@ type File struct {
 	key         string
 	tempFile    *os.File
 	writeBuffer *bytes.Buffer
+	opts        []vfs.FileOption
 }
 
 // Downloader interface needed to mock S3 Downloader data access object in tests
@@ -345,6 +346,15 @@ func (f *File) String() string {
 	return f.URI()
 }
 
+func (f *File) Options() []vfs.FileOption {
+	return f.opts
+}
+
+func (f *File) WithOption(opts ...vfs.FileOption) vfs.File {
+	f.opts = append(f.opts, opts...)
+	return f
+}
+
 /*
 Private helper functions
 */
@@ -492,6 +502,10 @@ func uploadInput(f *File) *s3manager.UploadInput {
 			input.ACL = &opts.ACL
 		}
 	}
+
+	utils.BindFileOptions[S3FileOption](f.Options(), func(opt S3FileOption) {
+		opt.UploadInput(input)
+	})
 
 	return input
 }

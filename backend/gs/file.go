@@ -412,6 +412,14 @@ func (f *File) URI() string {
 	return utils.GetFileURI(vfs.File(f))
 }
 
+func (f *File) Options() []vfs.FileOption {
+	return nil
+}
+
+func (f *File) WithOption(attrs ...vfs.FileOption) vfs.File {
+	return f
+}
+
 func (f *File) checkTempFile() error {
 	if f.tempFile == nil {
 		localTempFile, err := f.copyToLocalTempReader()

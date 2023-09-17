@@ -16,6 +16,15 @@ type File struct {
 	mock.Mock
 }
 
+// TODO: temporary fix
+func (f *File) Options() []vfs.FileOption {
+	return nil
+}
+
+func (f *File) WithOption(attrs ...vfs.FileOption) vfs.File {
+	return f
+}
+
 // Close provides a mock function with given fields:
 func (_m *File) Close() error {
 	ret := _m.Called()
